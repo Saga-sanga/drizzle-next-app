@@ -45,10 +45,9 @@ export default function TodoList({
       await utils.getTodos.cancel();
       const prevState = utils.getTodos.getData();
       utils.getTodos.setData(undefined, (old) => {
-        if (old !== undefined) {
+        if (old) {
           const index = old.findIndex((item) => item.id === doneState.id);
-          old[index].done === doneState.done;
-          console.log({ old }, index);
+          old[index].done = doneState.done;
         }
         return old;
       });
