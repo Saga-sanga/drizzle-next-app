@@ -4,7 +4,7 @@ import { drizzle } from "drizzle-orm/vercel-postgres";
 import { todos } from "@/db/schema";
 import { z } from "zod";
 import { seed } from "@/db/seed";
-import { eq } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 
 export const db = drizzle(sql);
 
@@ -12,7 +12,7 @@ export const appRouter = router({
   getTodos: publicProcedure.query(async () => {
     let res;
     try {
-      res = await db.select().from(todos);
+      res = await db.select().from(todos).orderBy(asc(todos.id));
     } catch (e: any) {
       if (e.message === `relation "todos" does not exist`) {
         console.log(
