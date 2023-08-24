@@ -2,10 +2,17 @@
 import { useState } from "react";
 import { trpc } from "../_trpc/client";
 import { Trash2 as Trash } from "lucide-react";
+import { serverClient } from "../_trpc/serverClient";
 
-export default function TodoList() {
+export default function TodoList({
+  initalTodos,
+}: {
+  initalTodos: Awaited<ReturnType<(typeof serverClient)["getTodos"]>>;
+}) {
   const utils = trpc.useContext();
-  const getTodos = trpc.getTodos.useQuery();
+  const getTodos = trpc.getTodos.useQuery(undefined, {
+    initialData: initalTodos,
+  });
   const addTodo = trpc.addTodo.useMutation({
     onSettled: () => utils.getTodos.invalidate(),
   });
@@ -26,6 +33,9 @@ export default function TodoList() {
 
   return (
     <div>
+      <h1 className="text-4xl text-center font-bold text-emerald-500">
+        World's Best Todo List
+      </h1>
       <div className="text-black my-5 text-3xl">
         {/* {JSON.stringify(getTodos.data?.sort((a,b) => a.id - b.id))} */}
         {getTodos?.data
@@ -36,7 +46,7 @@ export default function TodoList() {
                 type="checkbox"
                 id={`check-${todo.id}`}
                 checked={!!todo.done}
-                style={{ zoom: 1.5 }}
+                style={{ zoom: 1.6 }}
                 onChange={async () =>
                   setDone.mutate({ id: todo.id, done: !todo.done })
                 }
