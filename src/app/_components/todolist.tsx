@@ -25,7 +25,7 @@ export default function TodoList({
           ? [
               ...old,
               {
-                id: old[old?.length - 1].id + 1,
+                id: old.length ? old[old?.length - 1].id + 1 : 1,
                 done: false,
                 content: newTodo,
               },
