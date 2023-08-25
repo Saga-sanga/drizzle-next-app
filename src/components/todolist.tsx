@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import { trpc } from "../_trpc/client";
+import { trpc } from "../app/_trpc/client";
 import { Trash2 as Trash } from "lucide-react";
-import { serverClient } from "../_trpc/serverClient";
+import { serverClient } from "../app/_trpc/serverClient";
 import { cn } from "@/lib/utils";
 
 export default function TodoList({
@@ -124,7 +124,7 @@ export default function TodoList({
           value={content}
           onChange={(e) => setContent(e.target.value)}
           onKeyDown={(e) => (e.key === "Enter" ? handleSubmit() : null)}
-          className="text-black flex-grow rounded-md border-gray-300 py-2 px-4 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          className="text-black flex-grow rounded-md border border-gray-300 py-2 px-4 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           type="text"
         />
         <button

@@ -1,12 +1,9 @@
-import { publicProcedure, router } from "./trpc";
 import { sql } from "@vercel/postgres";
 import { drizzle } from "drizzle-orm/vercel-postgres";
 import { migrate } from "drizzle-orm/vercel-postgres/migrator";
-import { todos, users } from "@/db/schema";
-import { z } from "zod";
-import { asc, eq } from "drizzle-orm";
-import { userRouter } from "./routers/user";
 import { todosRouter } from "./routers/todos";
+import { userRouter } from "./routers/user";
+import { router } from "./trpc";
 
 export const db = drizzle(sql);
 
