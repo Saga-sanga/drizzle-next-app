@@ -8,43 +8,44 @@ import { cn } from "@/lib/utils";
 export default function TodoList({
   initalTodos,
 }: {
-  initalTodos: Awaited<ReturnType<(typeof serverClient)["getTodos"]>>;
+  initalTodos: Awaited<ReturnType<(typeof serverClient)["todos"]["getTodos"]>>;
 }) {
   const utils = trpc.useContext();
-  const getTodos = trpc.getTodos.useQuery(undefined, {
+  const getTodos = trpc.todos.getTodos.useQuery(undefined, {
     initialData: initalTodos,
     staleTime: 3 * 1000,
   });
 
-  const addTodo = trpc.addTodo.useMutation({
+  const addTodo = trpc.todos.addTodo.useMutation({
     onMutate: async (newTodo) => {
-      await utils.getTodos.cancel();
-      const prevData = utils.getTodos.getData();
-      utils.getTodos.setData(undefined, (old) =>
-        old
-          ? [
-              ...old,
-              {
-                id: old.length ? old[old?.length - 1].id + 1 : 1,
-                done: false,
-                content: newTodo,
-              },
-            ]
-          : undefined
+      await utils.todos.getTodos.cancel();
+      const prevData = utils.todos.getTodos.getData();
+      utils.todos.getTodos.setData(
+        undefined,
+        (old) =>
+          old && [
+            ...old,
+            {
+              id: old.length ? old[old?.length - 1].id + 1 : 1,
+              done: false,
+              content: newTodo,
+              userId: old[0]?.userId || null,
+            },
+          ]
       );
       return { prevData };
     },
     onError: (err, newTodo, context) => {
-      utils.getTodos.setData(undefined, context?.prevData);
+      utils.todos.getTodos.setData(undefined, context?.prevData);
     },
-    onSettled: () => utils.getTodos.invalidate(),
+    onSettled: () => getTodos.refetch(),
   });
 
-  const setDone = trpc.setDone.useMutation({
+  const setDone = trpc.todos.setDone.useMutation({
     onMutate: async (doneState) => {
-      await utils.getTodos.cancel();
-      const prevState = utils.getTodos.getData();
-      utils.getTodos.setData(undefined, (old) => {
+      await utils.todos.getTodos.cancel();
+      const prevState = utils.todos.getTodos.getData();
+      utils.todos.getTodos.setData(undefined, (old) => {
         if (old) {
           const index = old.findIndex((item) => item.id === doneState.id);
           old[index].done = doneState.done;
@@ -54,26 +55,26 @@ export default function TodoList({
       return { prevState };
     },
     onError: (err, prevData, context) =>
-      utils.getTodos.setData(undefined, context?.prevState),
-    onSettled: () => utils.getTodos.invalidate(),
+      utils.todos.getTodos.setData(undefined, context?.prevState),
+    onSettled: () => utils.todos.getTodos.invalidate(),
   });
 
-  const removeTodo = trpc.removeTodo.useMutation({
+  const removeTodo = trpc.todos.removeTodo.useMutation({
     onMutate: async ({ id }) => {
-      await utils.getTodos.cancel();
-      const prevState = utils.getTodos.getData();
-      utils.getTodos.setData(undefined, (old) => {
+      await utils.todos.getTodos.cancel();
+      const prevState = utils.todos.getTodos.getData();
+      utils.todos.getTodos.setData(undefined, (old) => {
         if (old) {
           const index = old.findIndex((ele) => ele.id === id);
-          old.splice(index);
+          old.splice(index, 1);
         }
         return old;
       });
       return { prevState };
     },
     onError: (err, prevData, context) =>
-      utils.getTodos.setData(undefined, context?.prevState),
-    onSettled: () => utils.getTodos.invalidate(),
+      utils.todos.getTodos.setData(undefined, context?.prevState),
+    onSettled: () => utils.todos.getTodos.invalidate(),
   });
   const [content, setContent] = useState("");
 

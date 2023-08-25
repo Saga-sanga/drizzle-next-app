@@ -1,8 +1,8 @@
 {
   "version": "5",
   "dialect": "pg",
-  "id": "9eecfdc5-6aed-426f-a378-63d8bacd5c91",
-  "prevId": "e7e6cb0b-756a-4b95-87d7-22674adbe9d4",
+  "id": "aa6889a8-cba1-460e-ab22-a06910e1d569",
+  "prevId": "9c1f4153-b6b9-4b41-a310-0dc16dbda8a7",
   "tables": {
     "todos": {
       "name": "todos",
@@ -20,9 +20,49 @@
           "primaryKey": false,
           "notNull": false
         },
+        "user_id": {
+          "name": "user_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
         "done": {
           "name": "done",
           "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(30)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image": {
+          "name": "image",
+          "type": "varchar(250)",
           "primaryKey": false,
           "notNull": false
         }

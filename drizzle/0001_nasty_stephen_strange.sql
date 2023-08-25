@@ -1,1 +1,0 @@
-ALTER TABLE "todos" ALTER COLUMN "content" SET DATA TYPE varchar(50);

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "generate": "drizzle-kit generate:pg",
-    "introspect": "drizzle-kit introspect:pg"
+    "introspect": "drizzle-kit introspect:pg",
+    "migrate": "drizzle-kit push:pg"
   },
   "dependencies": {
     "@opentelemetry/api": "^1.4.1",
