@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Provider from "./_trpc/Provider";
 import { cn } from "@/lib/utils";
-import { UserNav } from "@/components/user-nav";
-import { serverClient } from "./_trpc/serverClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,15 +16,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const user = await serverClient.users.getUser({
-    email: "reckson@example.com",
-  });
   return (
     <html lang="en">
       <body className={cn(inter.className, "min-h-screen")}>
-        <nav className="h-20 px-8 flex items-center justify-end">
-          <UserNav user={user} />
-        </nav>
         <Provider>{children}</Provider>
       </body>
     </html>
