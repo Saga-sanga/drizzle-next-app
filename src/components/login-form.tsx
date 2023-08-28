@@ -96,6 +96,7 @@ export default function LoginForm() {
           Google
         </Button>
       </div>
+      <a className="text-center underline text-sm text-muted-foreground" href="/register">Don't have an account? Sign Up</a>
     </div>
   );
 }
