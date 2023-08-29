@@ -1,27 +1,25 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
-
-import { Button } from "@/components/ui/button";
+import { formSchema } from "@/db/validators";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { formSchema } from "@/db/validators";
+  FormMessage,
+} from "./ui/form";
 import { useState } from "react";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 import { Icons } from "./icons";
 
 type Schema = z.infer<typeof formSchema>;
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
-
   const form = useForm<Schema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,7 +51,6 @@ export default function LoginForm() {
                 <FormLabel className="font-normal peer-valid:-translate-y-4 peer-valid:scale-90 peer-focus:-translate-y-4 peer-focus:scale-90 peer-focus:text-black transition text-muted-foreground duration-50 ease-out cursor-text bg-white px-1 absolute top-0 translate-x-3 translate-y-1">
                   Email
                 </FormLabel>
-                {/* <FormDescription>Enter your email to login</FormDescription> */}
                 <FormMessage />
               </FormItem>
             )}
@@ -62,7 +59,7 @@ export default function LoginForm() {
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Login with Email
+            Sign In with Email
           </Button>
         </form>
       </Form>
@@ -94,12 +91,6 @@ export default function LoginForm() {
           Google
         </Button>
       </div>
-      <a
-        className="text-center underline text-sm text-muted-foreground"
-        href="/register"
-      >
-        Don't have an account? Sign Up
-      </a>
     </div>
   );
 }
