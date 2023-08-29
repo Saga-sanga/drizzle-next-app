@@ -7,8 +7,11 @@ import { eq } from "drizzle-orm";
 export const userRouter = router({
   getUser: publicProcedure
     .input(z.object({ email: z.string() }))
-    .query(
-      async ({ input }) =>
-        await db.select().from(users).where(eq(users.email, input.email))
-    ),
+    .query(async ({ input }) => {
+      const [user] = await db
+        .select()
+        .from(users)
+        .where(eq(users.email, input.email));
+      return user;
+    }),
 });

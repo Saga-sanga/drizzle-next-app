@@ -52,7 +52,7 @@ export default function LoginForm() {
             render={({ field }) => (
               <FormItem className="relative">
                 <FormControl>
-                  <Input className="peer" {...field} required />
+                  <Input className="peer h-10" {...field} required />
                 </FormControl>
                 <FormLabel className="font-normal peer-valid:-translate-y-4 peer-valid:scale-90 peer-focus:-translate-y-4 peer-focus:scale-90 peer-focus:text-black transition text-muted-foreground duration-50 ease-out cursor-text bg-white px-1 absolute top-0 translate-x-3 translate-y-1">
                   Email
@@ -62,7 +62,7 @@ export default function LoginForm() {
               </FormItem>
             )}
           />
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" disabled={isLoading} size="lg">
             {isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
             Login with Email
           </Button>
@@ -79,7 +79,7 @@ export default function LoginForm() {
         </div>
       </div>
       <div className="flex flex-col gap-3">
-        <Button disabled={isLoading}>
+        <Button disabled={isLoading} size="lg">
           {isLoading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           ) : (
@@ -87,7 +87,7 @@ export default function LoginForm() {
           )}
           Github
         </Button>
-        <Button disabled={isLoading}>
+        <Button disabled={isLoading} size="lg">
           {isLoading ? (
             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
           ) : (

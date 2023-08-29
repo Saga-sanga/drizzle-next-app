@@ -15,7 +15,7 @@ export default function Page() {
           "absolute top-4 left-4 md:top-8 md:left-8"
         )}
       >
-        <ChevronLeft className="mr-2 w-4 h-4"/>
+        <ChevronLeft className="mr-2 w-4 h-4" />
         Back
       </Link>
       <div className="flex flex-col space-y-2 items-center text-center">
