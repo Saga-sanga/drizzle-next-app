@@ -15,6 +15,20 @@
       "when": 1692950421510,
       "tag": "0001_warm_aqueduct",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1693301818466,
+      "tag": "0002_closed_rattler",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1693302587913,
+      "tag": "0003_regular_shinobi_shaw",
+      "breakpoints": true
     }
   ]
 }

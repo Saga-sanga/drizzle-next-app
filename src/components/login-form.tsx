@@ -10,12 +10,13 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { formSchema } from "@/db/validators";
 import { useState } from "react";
 import { Icons } from "./icons";
+import OAuthButtons from "./oauth-buttons";
 
 type Schema = z.infer<typeof formSchema>;
 
@@ -76,24 +77,7 @@ export default function LoginForm() {
           </span>
         </div>
       </div>
-      <div className="flex flex-col gap-3">
-        <Button disabled={isLoading} size="lg" variant="outline">
-          {isLoading ? (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <Icons.gitHub className="mr-2 h-4 w-4" />
-          )}
-          Github
-        </Button>
-        <Button disabled={isLoading} size="lg" variant="outline">
-          {isLoading ? (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <Icons.google className="mr-2 h-4 w-4" />
-          )}
-          Google
-        </Button>
-      </div>
+      <OAuthButtons isLoading={isLoading} />
       <a
         className="text-center underline text-sm text-muted-foreground"
         href="/register"

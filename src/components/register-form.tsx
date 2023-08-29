@@ -15,6 +15,7 @@ import { useState } from "react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Icons } from "./icons";
+import OAuthButtons from "./oauth-buttons";
 
 type Schema = z.infer<typeof formSchema>;
 
@@ -73,24 +74,7 @@ export default function RegisterForm() {
           </span>
         </div>
       </div>
-      <div className="flex flex-col gap-3">
-        <Button disabled={isLoading} size="lg" variant="outline">
-          {isLoading ? (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <Icons.gitHub className="mr-2 h-4 w-4" />
-          )}
-          Github
-        </Button>
-        <Button disabled={isLoading} size="lg" variant="outline">
-          {isLoading ? (
-            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-          ) : (
-            <Icons.google className="mr-2 h-4 w-4" />
-          )}
-          Google
-        </Button>
-      </div>
+      <OAuthButtons isLoading={isLoading}/>
     </div>
   );
 }

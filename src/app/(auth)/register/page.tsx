@@ -7,7 +7,22 @@ import Link from "next/link";
 export default function Page() {
   return (
     <main className="grid lg:grid-cols-2 min-h-screen">
-      <div className="col-span-1 bg-black hidden lg:block"></div>
+      <div className="hidden col-span-1 flex-col bg-primary p-10 text-background lg:flex">
+        <div className=" text-lg font-medium flex items-center">
+          <ListTodo className="w-10 h-10 mr-2 stroke-background" />
+          TODO App
+        </div>
+        <div className="mt-auto">
+          <blockquote className="space-y-2">
+            <p className="text-lg">
+              &ldquo;This todo app has saved me countless hours of work and
+              helped me deliver stunning designs to my clients faster than ever
+              before.&rdquo;
+            </p>
+            <footer className="text-sm">Mike Hawk</footer>
+          </blockquote>
+        </div>
+      </div>
       <div className="col-span-1 space-y-6 relative grid place-content-center">
         <Link
           className={cn(
@@ -19,7 +34,7 @@ export default function Page() {
           Login
         </Link>
         <div className="text-center flex flex-col space-y-2">
-          <ListTodo className="w-8 h-8 mx-auto" />
+          {/* <ListTodo className="w-8 h-8 mx-auto" /> */}
           <h1 className="text-2xl font-semibold tracking-tight">
             Create an account
           </h1>
@@ -27,7 +42,7 @@ export default function Page() {
             Enter your email below to create your account
           </p>
         </div>
-        <RegisterForm/>
+        <RegisterForm />
       </div>
     </main>
   );
